@@ -29,16 +29,32 @@
     <option>Pemeriksaan</option>
   </select><br>
 
-  <textarea name="deskripsi" placeholder="Deskripsi Pekerjaan"></textarea><br>
+  <textarea name="deskripsi" placeholder="Deskripsi Pekerjaan" required></textarea><br>
 
   <input name="pic" placeholder="PIC / Penanggung Jawab" required><br>
-  <input name="whatsapp" placeholder="Nomor WhatsApp (628xxx)" required><br>
+  <input 
+  name="whatsapp"
+  id="whatsapp"
+  placeholder="628xxxxxxxxx"
+  required
+  pattern="62[0-9]{9,13}"
+  inputmode="numeric"
+  maxlength="15"
+>
+<small>Format wajib: 62xxxxxxxxx</small>
 
   <button type="submit">Kirim</button>
 </form>
 
 <script>
-document.getElementById("izinForm").addEventListener("submit", function(e){
+  const wa = document.getElementById("whatsapp");
+
+wa.addEventListener("input", () => {
+  wa.value = wa.value
+    .replace(/[^0-9]/g, "")   // hapus non angka
+    .replace(/^0/, "62");     // kalau mulai 0 → jadi 62
+});
+  document.getElementById("izinForm").addEventListener("submit", function(e){
   e.preventDefault();
 
   const data = new URLSearchParams(new FormData(this));
@@ -52,6 +68,7 @@ document.getElementById("izinForm").addEventListener("submit", function(e){
   alert("Laporan dikirim");
   this.reset();
 });
+
 </script>
 </body>
 </html>
