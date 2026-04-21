@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Form Izin Kerja Stasiun Tasikmalaya</title>
+</head>
+<body>
+
+<h2>Form Pantauan Izin Kerja</h2>
+
+<form id="izinForm">
+  <input name="no_permit" placeholder="No Permit" required><br>
+  <input name="nama_pekerjaan" placeholder="Nama Pekerjaan" required><br>
+  <input name="unit_kontraktor" placeholder="Unit / Kontraktor" required><br>
+
+  <label>Jam Mulai</label><br>
+  <input type="time" name="jam_mulai" required><br>
+
+  <label>Jam Selesai</label><br>
+  <input type="time" name="jam_selesai" required><br>
+
+  <input name="lokasi" placeholder="Lokasi Pekerjaan" required><br>
+
+  <select name="jenis_pekerjaan" required>
+    <option value="">Jenis Pekerjaan</option>
+    <option>Perawatan</option>
+    <option>Perbaikan</option>
+    <option>Instalasi</option>
+    <option>Pemeriksaan</option>
+  </select><br>
+
+  <textarea name="deskripsi" placeholder="Deskripsi Pekerjaan"></textarea><br>
+
+  <input name="pic" placeholder="PIC / Penanggung Jawab" required><br>
+  <input name="whatsapp" placeholder="Nomor WhatsApp (628xxx)" required><br>
+
+  <button type="submit">Kirim</button>
+</form>
+
+<script>
+document.getElementById("izinForm").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  const formData = new URLSearchParams(new FormData(this));
+
+  fetch("https://script.google.com/macros/s/AKfycby3e3odlAxgbU7vVy0WjOQz_2BfzPaOnjjU_bhHELGd_2CZ6XgmymtWDWe6DOaubTALyw/exec", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: formData
+  })
+  .then(res => res.text())
+  .then(t => {
+    console.log(t);
+    alert("Laporan berhasil dikirim");
+  })
+  .catch(err => {
+    console.error(err);
+    alert("Gagal mengirim");
+  });
+});
+</script>
+</body>
+</html>
