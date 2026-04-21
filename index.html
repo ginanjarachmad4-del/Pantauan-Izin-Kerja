@@ -43,11 +43,8 @@ document.getElementById("izinForm").addEventListener("submit", function(e){
 
   const formData = new URLSearchParams(new FormData(this));
 
-fetch("https://script.google.com/macros/s/AKfycbw_F8RZckKIRmQhwOy_ocD15XU8zk0V78fSBL38thMHAzvhRyKB_t2mMpAhT_INOxerng/exec", {
+fetch("https://script.google.com/macros/s/AKfycbxeJrrepNm1E_HbztB53WNTHTzrknGV3NtCHAR0yWYcj1fDTKbndN2v69wMXx5VngA3TQ/exec", {
   method: "POST",
-  headers: {
-    "Content-Type": "application/x-www-form-urlencoded"
-  },
   body: formData
 })
   .then(res => res.text())
