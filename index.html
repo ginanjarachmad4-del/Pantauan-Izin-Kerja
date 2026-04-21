@@ -41,21 +41,16 @@
 document.getElementById("izinForm").addEventListener("submit", function(e){
   e.preventDefault();
 
-  const formData = new URLSearchParams(new FormData(this));
+  const data = new URLSearchParams(new FormData(this));
 
-fetch("https://script.google.com/macros/s/AKfycbwhCJFPfe6ZokNLkuHrCcGhtc3b0uNhiSdMhtyQzOTI16YKvIJBwRp2LEridwlqnfBxYA/exec", {
-  method: "POST",
-  body: formData
-})
-  .then(res => res.text())
-  .then(t => {
-    console.log(t);
-    alert("Laporan berhasil dikirim");
-  })
-  .catch(err => {
-    console.error(err);
-    alert("Gagal mengirim");
+  fetch("https://script.google.com/macros/s/AKfycbwhCJFPfe6ZokNLkuHrCcGhtc3b0uNhiSdMhtyQzOTI16YKvIJBwRp2LEridwlqnfBxYA/exec", {
+    method: "POST",
+    mode: "no-cors",   // 🔥 WAJIB
+    body: data
   });
+
+  alert("Laporan dikirim");
+  this.reset();
 });
 </script>
 </body>
