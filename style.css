@@ -34,27 +34,29 @@ body{
   gap:12px;
   flex-wrap:nowrap;
 
-  padding:6px 10px;
-  overflow:hidden;
+  padding:8px 10px;
+
+  overflow-x:auto;   /* lebih aman dari hidden */
+  overflow-y:hidden;
 }
 
-/* ALL LOGO UNIFORM CONTROL */
+/* FIX UTAMA LOGO */
 .logo-bar img.logo{
-  height:20px;
+  height:22px;
   width:auto;
 
-  max-height:20px;
-  max-width:70px;
+  max-height:22px;
+  max-width:80px;
 
   object-fit:contain;
-  display:block;
 
-  flex-shrink:0;
+  flex:0 0 auto;
+  display:block;
 
   transition:0.2s ease;
 }
 
-/* hover kecil */
+/* hover halus */
 .logo-bar img.logo:hover{
   transform:scale(1.05);
 }
@@ -62,8 +64,8 @@ body{
 /* MOBILE */
 @media(max-width:600px){
   .logo-bar img.logo{
-    height:16px;
-    max-width:50px;
+    height:18px;
+    max-width:60px;
   }
 
   .logo-bar{
