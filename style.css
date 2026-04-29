@@ -8,21 +8,22 @@
 
 /* ===== BODY ===== */
 body {
-  background: #0f172a;
+  background: #0b1220;
   color: #e2e8f0;
   padding: 16px;
+  padding-bottom: 80px; /* space buat bottom nav */
 }
 
 /* ===== HEADER ===== */
 .app-header {
   background: linear-gradient(135deg, #1e293b, #0f172a);
-  border-radius: 14px;
+  border-radius: 16px;
   padding: 16px;
   margin-bottom: 15px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.4);
 }
 
-/* ===== LOGO BAR ===== */
+/* ===== LOGO ===== */
 .logo-bar {
   display: flex;
   gap: 10px;
@@ -39,11 +40,11 @@ body {
 
 .logo-box:hover {
   background: rgba(255,255,255,0.15);
-  transform: scale(1.05);
+  transform: scale(1.08);
 }
 
 .logo {
-  height: 28px;
+  height: 26px;
   object-fit: contain;
 }
 
@@ -93,21 +94,30 @@ ul {
 }
 
 li {
-  background: #1e293b;
+  background: rgba(30,41,59,0.8);
   padding: 12px;
   margin-bottom: 10px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
   transition: 0.3s;
+  border: 1px solid rgba(255,255,255,0.05);
 }
 
 li:hover {
-  transform: scale(1.01);
+  transform: translateY(-2px);
 }
 
-/* ===== STATUS DOT ===== */
+/* ===== STATUS ANIMASI ===== */
 li span {
   margin-left: 5px;
+  color: #22c55e;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {opacity:1;}
+  50% {opacity:0.3;}
+  100% {opacity:1;}
 }
 
 /* ===== BUTTON ===== */
@@ -135,7 +145,7 @@ input, select, textarea {
   margin-bottom: 10px;
   border-radius: 8px;
   border: 1px solid #334155;
-  background: #0f172a;
+  background: #020617;
   color: #e2e8f0;
   outline: none;
   transition: 0.2s;
@@ -143,7 +153,7 @@ input, select, textarea {
 
 input:focus, select:focus, textarea:focus {
   border-color: #3b82f6;
-  box-shadow: 0 0 5px #3b82f6;
+  box-shadow: 0 0 6px #3b82f6;
 }
 
 /* ===== TEXTAREA ===== */
@@ -167,7 +177,7 @@ input[type="file"] {
   width: 100%;
   height: 100%;
   background: rgba(0,0,0,0.7);
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(5px);
   justify-content: center;
   align-items: center;
 }
@@ -175,7 +185,7 @@ input[type="file"] {
 #modal .box {
   background: #1e293b;
   padding: 20px;
-  border-radius: 14px;
+  border-radius: 16px;
   width: 90%;
   max-width: 400px;
   animation: fadeIn 0.25s ease;
@@ -184,6 +194,60 @@ input[type="file"] {
 /* ===== PREVIEW IMAGE ===== */
 #previewBox img {
   border-radius: 10px;
+}
+
+/* ===== TOAST ===== */
+#toast {
+  position: fixed;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #22c55e;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 8px;
+  opacity: 0;
+  transition: 0.4s;
+  z-index: 999;
+}
+
+#toast.error {
+  background: #ef4444;
+}
+
+#toast.show {
+  opacity: 1;
+  bottom: 100px;
+}
+
+/* ===== BOTTOM NAV ===== */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #020617;
+  border-top: 1px solid #1e293b;
+  display: flex;
+  justify-content: space-around;
+  padding: 8px 0;
+}
+
+.bottom-nav button {
+  background: none;
+  color: #94a3b8;
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bottom-nav button span {
+  font-size: 11px;
+}
+
+.bottom-nav button:hover {
+  color: #3b82f6;
 }
 
 /* ===== ANIMATION ===== */
@@ -202,6 +266,7 @@ input[type="file"] {
 ::-webkit-scrollbar {
   width: 6px;
 }
+
 ::-webkit-scrollbar-thumb {
   background: #334155;
   border-radius: 10px;
