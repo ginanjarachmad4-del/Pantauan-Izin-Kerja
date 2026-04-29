@@ -2,22 +2,39 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Form Izin Kerja Stasiun Tasikmalaya</title>
+<title>Pantauan Izin Kerja Stasiun Tasikmalaya</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h2>Form Pantauan Izin Kerja</h2>
+<h2>Pantauan dan Notifikasi Izin Kerja Stasiun Tasikmalaya<br>
+DAOP 2 BANDUNG</h2>
 
+<nav>
+  <button onclick="showMenu('mulai')">🟢 Laporan Mulai</button>
+  <button onclick="showMenu('dokumen')">📸 Dokumentasi</button>
+</nav>
+
+<hr>
+
+<h3>📋 Pekerjaan Aktif</h3>
+<ul id="jobList"></ul>
+
+<!-- ===== MULAI ===== -->
+<section id="mulai" class="menu">
 <form id="izinForm">
   <input name="no_permit" placeholder="No Permit" required><br>
   <input name="nama_pekerjaan" placeholder="Nama Pekerjaan" required><br>
   <input name="unit_kontraktor" placeholder="Unit / Kontraktor" required><br>
 
-  <label>Jam Mulai</label><br>
-  <input type="time" name="jam_mulai" required><br>
+  <label>Rencana Jam Mulai</label><br>
+  <input type="time" name="rencana_jam_mulai" required><br>
 
-  <label>Jam Selesai</label><br>
-  <input type="time" name="jam_selesai" required><br>
+  <label>Realisasi Jam Mulai</label><br>
+  <input type="time" name="realisasi_jam_mulai" required><br>
+
+  <label>Rencana Jam Selesai</label><br>
+  <input type="time" name="rencana_jam_selesai" required><br>
 
   <input name="lokasi" placeholder="Lokasi Pekerjaan" required><br>
 
@@ -32,43 +49,220 @@
   <textarea name="deskripsi" placeholder="Deskripsi Pekerjaan" required></textarea><br>
 
   <input name="pic" placeholder="PIC / Penanggung Jawab" required><br>
-  <input 
-  name="whatsapp"
-  id="whatsapp"
-  placeholder="628xxxxxxxxx"
-  required
-  pattern="62[0-9]{9,13}"
-  inputmode="numeric"
-  maxlength="15"
->
-<small>Format wajib: 62xxxxxxxxx</small>
+  <input class="whatsapp" name="whatsapp" placeholder="628xxxx" required><br><br>
 
-  <button type="submit">Kirim</button>
+  <button type="submit">Kirim Laporan Mulai</button>
 </form>
+</section>
+
+<!-- ===== DOKUMENTASI ===== -->
+<section id="dokumen" class="menu" style="display:none">
+<form id="docForm">
+
+  <!-- 🔥 DROPDOWN PERMIT -->
+  <select name="no_permit" id="permitDoc" required>
+    <option value="">Pilih Permit</option>
+  </select><br><br>
+
+  <input type="file" id="file" accept="image/*" required>
+
+  <div id="previewBox" style="margin-top:10px; display:none;">
+    <p style="font-weight:600">Preview Dokumentasi:</p>
+    <img id="imgPreview"
+         style="max-width:100%; max-height:250px; border-radius:8px; border:1px solid #ccc;">
+  </div>
+
+  <br>
+  <button type="submit">Upload</button>
+</form>
+</section>
+
+<!-- ===== MODAL SELESAI ===== -->
+<div id="modal">
+  <div class="box">
+    <h3>Laporan Selesai</h3>
+    <form id="modalForm">
+      <input type="hidden" id="jobIndex">
+      <p id="jobInfo"></p>
+
+      <label>Realisasi Jam Selesai</label><br>
+      <input type="time" name="realisasi_jam_selesai" required><br><br>
+
+      <textarea name="hasil_pekerjaan" placeholder="Hasil pekerjaan" required></textarea><br><br>
+
+      <button type="submit">Kirim</button>
+      <button type="button" onclick="closeModal()">Batal</button>
+    </form>
+  </div>
+</div>
 
 <script>
-  const wa = document.getElementById("whatsapp");
+const STORAGE_KEY = "pekerjaan_aktif";
+let pekerjaanAktif = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
 
-wa.addEventListener("input", () => {
-  wa.value = wa.value
-    .replace(/[^0-9]/g, "")   // hapus non angka
-    .replace(/^0/, "62");     // kalau mulai 0 → jadi 62
+const jobList   = document.getElementById("jobList");
+const izinForm  = document.getElementById("izinForm");
+const modalForm = document.getElementById("modalForm");
+const modal     = document.getElementById("modal");
+const jobIndex  = document.getElementById("jobIndex");
+const jobInfo   = document.getElementById("jobInfo");
+const docForm   = document.getElementById("docForm");
+const fileInput = document.getElementById("file");
+const permitDoc = document.getElementById("permitDoc");
+const previewBox = document.getElementById("previewBox");
+const imgPreview = document.getElementById("imgPreview");
+
+function saveStorage(){
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(pekerjaanAktif));
+}
+
+function showMenu(id){
+  document.querySelectorAll(".menu").forEach(m=>m.style.display="none");
+  document.getElementById(id).style.display="block";
+}
+
+document.querySelectorAll(".whatsapp").forEach(i=>{
+  i.oninput=()=>i.value=i.value.replace(/\D/g,"").replace(/^0/,"62");
 });
-  document.getElementById("izinForm").addEventListener("submit", function(e){
-  e.preventDefault();
 
-  const data = new URLSearchParams(new FormData(this));
+function renderPermitDoc(){
+  permitDoc.innerHTML = "<option value=''>Pilih Permit</option>";
+  pekerjaanAktif.forEach(p=>{
+    permitDoc.innerHTML += `<option value="${p.no}">${p.no} - ${p.nama}</option>`;
+  });
+}
 
-  fetch("https://script.google.com/macros/s/AKfycbxLH9-f5XHAvlmsC3wvfHB8kXo19R6z8gaR0e7nUW5CkFGjkevNJFX-dmsyCNAr6l37hg/exec", {
-    method: "POST",
-    mode: "no-cors",   // 🔥 WAJIB
-    body: data
+function renderList(){
+  if(pekerjaanAktif.length===0){
+    jobList.innerHTML="<li><i>Tidak ada pekerjaan aktif</i></li>";
+    renderPermitDoc();
+    return;
+  }
+
+  jobList.innerHTML="";
+  pekerjaanAktif.forEach((j,i)=>{
+    jobList.innerHTML+=`
+      <li>
+        <b>${j.no}</b> - ${j.nama} 
+        <span style="color:green;font-weight:bold">● AKTIF</span><br>
+        <small>${j.lokasi} | ${j.jam_mulai}</small><br>
+        <button onclick="openModal(${i})">✅ Laporan Selesai</button>
+      </li>`;
   });
 
-  alert("Laporan dikirim");
-  this.reset();
-});
+  renderPermitDoc();
+}
 
+renderList();
+
+/* ===== SUBMIT MULAI ===== */
+izinForm.onsubmit = e => {
+  e.preventDefault();
+  const fd = new FormData(izinForm);
+
+  if(pekerjaanAktif.some(p => p.no === fd.get("no_permit"))){
+    alert("❌ No Permit sudah ada");
+    return;
+  }
+
+  fetch("https://script.google.com/macros/s/AKfycbzlCm6D1CBod9oIpjikP3cJE_6a5MXnV7SeunRLScqtd7O4nkS3xbGEZf1EuzG-qZbk6A/exec", {
+    method: "POST",
+    mode: "no-cors",
+    body: fd
+  });
+
+  pekerjaanAktif.push({
+    no: fd.get("no_permit"),
+    nama: fd.get("nama_pekerjaan"),
+    lokasi: fd.get("lokasi"),
+    jam_mulai: fd.get("realisasi_jam_mulai")
+  });
+
+  saveStorage();
+  renderList();
+  izinForm.reset();
+  showMenu("dokumen");
+  alert("✅ Laporan Mulai tersimpan");
+};
+
+/* ===== MODAL ===== */
+function openModal(i){
+  jobIndex.value = i;
+  jobInfo.innerText = pekerjaanAktif[i].no+" - "+pekerjaanAktif[i].nama;
+  modal.style.display="block";
+}
+function closeModal(){ modal.style.display="none"; }
+
+modal.onclick = e => { if(e.target === modal) closeModal(); };
+
+/* ===== SUBMIT SELESAI ===== */
+modalForm.onsubmit = e => {
+  e.preventDefault();
+  const i = jobIndex.value;
+  if(!confirm("Yakin laporan pekerjaan sudah selesai?")) return;
+
+  const fd = new FormData(modalForm);
+  fd.append("no_permit", pekerjaanAktif[i].no);
+
+  fetch("https://script.google.com/macros/s/AKfycbzlCm6D1CBod9oIpjikP3cJE_6a5MXnV7SeunRLScqtd7O4nkS3xbGEZf1EuzG-qZbk6A/exec", {
+    method: "POST",
+    mode: "no-cors",
+    body: fd
+  });
+
+  pekerjaanAktif.splice(i,1);
+  saveStorage();
+  renderList();
+  modalForm.reset();
+  closeModal();
+  alert("Laporan Selesai terkirim");
+};
+
+/* ===== UPLOAD DOKUMEN ===== */
+docForm.onsubmit = e => {
+  e.preventDefault();
+  const f = fileInput.files[0];
+  if (!f) return alert("Pilih file");
+
+  const permit = permitDoc.value;
+  if (!permit) return alert("Pilih permit");
+
+  const r = new FileReader();
+  r.onload = () => {
+    const fd = new FormData();
+    fd.append("action","upload_dokumentasi");
+    fd.append("no_permit",permit);
+    fd.append("filename",f.name);
+    fd.append("mime",f.type);
+    fd.append("file",r.result.split(",")[1]);
+
+    fetch("https://script.google.com/macros/s/AKfycbzlCm6D1CBod9oIpjikP3cJE_6a5MXnV7SeunRLScqtd7O4nkS3xbGEZf1EuzG-qZbk6A/exec", {
+      method:"POST",
+      mode:"no-cors",
+      body:fd
+    });
+
+    alert("📸 Dokumentasi terkirim");
+    docForm.reset();
+    previewBox.style.display="none";
+  };
+  r.readAsDataURL(f);
+};
+
+/* ===== PREVIEW ===== */
+fileInput.onchange = function(){
+  const file = this.files[0];
+  if(!file || !file.type.startsWith("image/")) return;
+  if(file.size > 5*1024*1024) return alert("Maks 5MB");
+
+  const r = new FileReader();
+  r.onload = e=>{
+    imgPreview.src=e.target.result;
+    previewBox.style.display="block";
+  };
+  r.readAsDataURL(file);
+};
 </script>
+
 </body>
 </html>
