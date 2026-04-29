@@ -237,7 +237,15 @@ form button[type="submit"]{
   max-width:400px;
   width:90%;
 }
-
+img.logo{
+  height: 28px !important;
+  max-height: 28px !important;
+  width: auto !important;
+  max-width: 70px !important;
+  object-fit: contain !important;
+  display: inline-block !important;
+  transform: none !important;
+}
 /* =====================
    RESPONSIVE
 ===================== */
