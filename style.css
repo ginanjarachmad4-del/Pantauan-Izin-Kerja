@@ -1,67 +1,52 @@
 :root{
   --primary:#0f2a44;
+  --secondary:#ff9800;
   --bg:#f4f6f8;
   --border:#e5e7eb;
   --text:#1f2937;
 }
 
-/* HEADER WRAPPER */
+/* RESET */
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:"Segoe UI", Inter, Arial, sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+/* ================= HEADER ================= */
 .app-header{
   background:#fff;
   border-bottom:2px solid var(--border);
   padding:10px 12px;
-
   display:flex;
   flex-direction:column;
   align-items:center;
-
-  position:sticky;
-  top:0;
-  z-index:999;
 }
 
-/* LOGO BAR GRID (INI KUNCI PRO LEVEL) */
+/* LOGO BAR */
 .logo-bar{
-  display:grid;
-  grid-template-columns:repeat(4, 1fr);
-  gap:10px;
-
-  width:100%;
-  max-width:420px;
-
-  align-items:center;
-  justify-items:center;
-
-  padding:6px 0;
-}
-
-/* BOX FIX UNTUK NORMALISASI LOGO */
-.logo-box{
-  width:100%;
-  height:26px;
-
   display:flex;
-  align-items:center;
   justify-content:center;
+  align-items:center;
+  gap:10px;
+  width:100%;
+  flex-wrap:nowrap;
 }
 
-/* LOGO FINAL CONTROL */
-.logo-box img.logo{
-  max-height:22px;
-  max-width:70px;
-
+/* 🔥 KUNCI UTAMA FIX SIZE LOGO */
+.logo-bar img.logo{
+  height:18px;        /* FIX SIZE UTAMA */
   width:auto;
-  height:auto;
-
+  max-width:60px;
   object-fit:contain;
-
-  filter: drop-shadow(0 1px 1px rgba(0,0,0,.08));
-  transition:0.2s ease;
-}
-
-/* hover subtle */
-.logo-box img.logo:hover{
-  transform:scale(1.06);
+  display:block;
+  flex-shrink:0;
 }
 
 /* TITLE */
@@ -73,7 +58,7 @@
 .title strong{
   font-size:14px;
   color:var(--primary);
-  letter-spacing:.4px;
+  letter-spacing:.3px;
 }
 
 .title small{
@@ -81,27 +66,7 @@
   color:#6b7280;
 }
 
-/* RESPONSIVE HP */
-@media(max-width:600px){
-  .logo-bar{
-    max-width:100%;
-    gap:6px;
-  }
-
-  .logo-box{
-    height:22px;
-  }
-
-  .logo-box img.logo{
-    max-height:18px;
-    max-width:55px;
-  }
-
-  .title strong{
-    font-size:13px;
-  }
-}
-/* NAV */
+/* ================= NAV ================= */
 nav{
   display:flex;
   gap:10px;
@@ -127,52 +92,33 @@ nav button:hover{
   color:#000;
 }
 
-/* JOB LIST */
+/* ================= JOB LIST ================= */
 #jobList{
   list-style:none;
   padding:0 16px;
 }
 
 #jobList li{
-  background:var(--card);
+  background:#fff;
   border:1px solid var(--border);
   border-radius:14px;
   padding:14px;
   margin-bottom:10px;
-  box-shadow:0 6px 16px rgba(0,0,0,.08);
 }
 
-#jobList b{ color:var(--primary); }
-
-#jobList small{
-  display:block;
-  margin-top:4px;
-  color:#6b7280;
-}
-
-#jobList button{
-  margin-top:10px;
-  background:var(--success);
-  color:#fff;
-  border:none;
-  padding:8px 12px;
-  border-radius:8px;
-  cursor:pointer;
-}
-
-/* FORM */
+/* ================= FORM ================= */
 .menu{ padding:16px; }
 
 form{
   max-width:420px;
   margin:auto;
-  background:var(--card);
+  background:#fff;
   border:1px solid var(--border);
   border-radius:16px;
   padding:18px;
-  box-shadow:0 12px 24px rgba(0,0,0,.12);
 }
 
+/* INPUT */
 input, select, textarea{
   width:100%;
   padding:11px;
@@ -181,42 +127,24 @@ input, select, textarea{
   border:1px solid #d1d5db;
 }
 
+/* BUTTON */
 form button[type="submit"]{
   width:100%;
   padding:12px;
-  background:linear-gradient(135deg,var(--secondary),#ffb74d);
+  background:var(--secondary);
   border:none;
   font-weight:700;
   border-radius:12px;
 }
 
-/* MODAL */
-#modal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.6);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:999;
-}
-
-#modal .box{
-  background:#fff;
-  padding:20px;
-  border-radius:14px;
-  width:90%;
-  max-width:400px;
-}
-
-/* RESPONSIVE */
+/* ================= RESPONSIVE ================= */
 @media(max-width:600px){
-  nav{
-    flex-direction:column;
+  .logo-bar img.logo{
+    height:14px;   /* FIX FINAL HP BIAR TIDAK GEDI */
+    max-width:45px;
   }
 
-  .logo-bar img.logo{
-    height:22px;
-    max-width:55px;
+  nav{
+    flex-direction:column;
   }
 }
