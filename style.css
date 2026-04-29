@@ -1,0 +1,224 @@
+/* =====================
+   RESET & GLOBAL
+===================== */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #0e1117;
+  color: #e6e6e6;
+}
+
+/* =====================
+   HEADER
+===================== */
+h2 {
+  text-align: center;
+  padding: 18px;
+  margin: 0;
+  background: linear-gradient(135deg, #0b3c2d, #0f6b47);
+  color: #eafff6;
+  font-size: 20px;
+  letter-spacing: 0.5px;
+}
+
+h3 {
+  margin-top: 24px;
+  color: #7dffb3;
+}
+
+/* =====================
+   NAVIGATION
+===================== */
+nav {
+  display: flex;
+  gap: 12px;
+  padding: 16px;
+  justify-content: center;
+  background: #0b0f14;
+  border-bottom: 1px solid #1f2937;
+}
+
+nav button {
+  background: #111827;
+  color: #e5e7eb;
+  border: 1px solid #1f2937;
+  padding: 10px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+nav button:hover {
+  background: #065f46;
+  border-color: #10b981;
+  color: #ecfdf5;
+}
+
+/* =====================
+   LIST PEKERJAAN
+===================== */
+#jobList {
+  list-style: none;
+  padding: 0;
+  margin: 16px;
+}
+
+#jobList li {
+  background: #111827;
+  border: 1px solid #1f2937;
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+
+#jobList li b {
+  color: #7dffb3;
+  font-size: 15px;
+}
+
+#jobList small {
+  color: #9ca3af;
+}
+
+#jobList button {
+  margin-top: 10px;
+  background: #047857;
+  border: none;
+  color: #ecfdf5;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+#jobList button:hover {
+  background: #059669;
+}
+
+/* =====================
+   FORM UMUM
+===================== */
+.menu {
+  padding: 16px;
+}
+
+form {
+  max-width: 420px;
+  margin: auto;
+  background: #0b0f14;
+  border: 1px solid #1f2937;
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: 1px solid #1f2937;
+  background: #111827;
+  color: #e5e7eb;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #9ca3af;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: #10b981;
+}
+
+/* =====================
+   BUTTON SUBMIT
+===================== */
+form button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #047857, #10b981);
+  border: none;
+  color: #ecfdf5;
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+form button[type="submit"]:hover {
+  opacity: 0.9;
+}
+
+/* =====================
+   PREVIEW FOTO
+===================== */
+#previewBox {
+  background: #020617;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px dashed #1f2937;
+  text-align: center;
+}
+
+#previewBox p {
+  margin: 0 0 8px;
+  color: #7dffb3;
+}
+
+/* =====================
+   MODAL
+===================== */
+#modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+#modal .box {
+  background: #0b0f14;
+  border: 1px solid #1f2937;
+  border-radius: 14px;
+  padding: 20px;
+  width: 90%;
+  max-width: 400px;
+}
+
+#modal h3 {
+  margin-top: 0;
+  color: #7dffb3;
+}
+
+#modal button {
+  width: 100%;
+  margin-top: 8px;
+}
+
+#modal button[type="button"] {
+  background: #1f2937;
+  color: #e5e7eb;
+}
+
+/* =====================
+   RESPONSIVE
+===================== */
+@media (max-width: 600px) {
+  nav {
+    flex-direction: column;
+  }
+}
