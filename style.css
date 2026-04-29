@@ -44,13 +44,17 @@ body{
   display:flex;
   justify-content:center;
   align-items:center;
-  gap:25px;
+  gap:18px;
   flex-wrap:wrap;
+  padding:5px 0;
 }
 
-/* LOGO */
+/* LOGO FINAL FIX */
 .logo-bar .logo{
-  height:55px;
+  height:45px;
+  max-height:60px;
+  width:auto;
+  max-width:120px;
   object-fit:contain;
   transition:.2s;
 }
@@ -159,7 +163,6 @@ form{
   box-shadow:0 12px 24px rgba(0,0,0,.12);
 }
 
-/* INPUT */
 input,
 select,
 textarea{
@@ -185,7 +188,6 @@ textarea{
   resize:none;
 }
 
-/* BUTTON */
 form button[type="submit"]{
   width:100%;
   padding:12px;
@@ -235,7 +237,7 @@ form button[type="submit"]{
 }
 
 /* =====================
-   RESPONSIVE FIX (FINAL CLEAN)
+   RESPONSIVE FIX
 ===================== */
 @media(max-width:600px){
   nav{
@@ -243,10 +245,11 @@ form button[type="submit"]{
   }
 
   .logo-bar{
-    gap:15px;
+    gap:12px;
   }
 
   .logo-bar .logo{
-    height:45px;
+    height:35px;
+    max-width:90px;
   }
 }
