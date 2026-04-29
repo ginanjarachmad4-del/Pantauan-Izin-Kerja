@@ -28,7 +28,7 @@ body{
 }
 
 /* =====================
-   HEADER FINAL FIX
+   HEADER
 ===================== */
 .app-header{
   display:flex;
@@ -39,28 +39,31 @@ body{
   border-bottom:2px solid var(--border);
 }
 
-/* BARIS LOGO */
+/* LOGO BAR */
 .logo-bar{
   display:flex;
   justify-content:center;
   align-items:center;
-  gap:18px;
+  gap:15px;
   flex-wrap:wrap;
   padding:5px 0;
 }
 
-/* LOGO FINAL FIX */
-.logo-bar .logo{
-  height:45px;
-  max-height:60px;
-  width:auto;
-  max-width:120px;
-  object-fit:contain;
-  transition:.2s;
+/* =====================
+   🔥 FINAL LOGO FIX (FORCE)
+===================== */
+.logo-bar img.logo{
+  height:35px !important;
+  width:auto !important;
+  max-height:35px !important;
+  max-width:90px !important;
+  object-fit:contain !important;
+  display:block;
 }
 
-.logo-bar .logo:hover{
-  transform:scale(1.08);
+/* hover optional */
+.logo-bar img.logo:hover{
+  transform:scale(1.05);
 }
 
 /* TITLE */
@@ -101,7 +104,6 @@ nav button{
   border-radius:10px;
   cursor:pointer;
   font-weight:600;
-  transition:.2s;
 }
 
 nav button:hover{
@@ -237,7 +239,7 @@ form button[type="submit"]{
 }
 
 /* =====================
-   RESPONSIVE FIX
+   RESPONSIVE
 ===================== */
 @media(max-width:600px){
   nav{
@@ -245,11 +247,11 @@ form button[type="submit"]{
   }
 
   .logo-bar{
-    gap:12px;
+    gap:10px;
   }
 
-  .logo-bar .logo{
-    height:35px;
-    max-width:90px;
+  .logo-bar img.logo{
+    height:28px !important;
+    max-width:70px !important;
   }
 }
