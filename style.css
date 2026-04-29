@@ -1,162 +1,208 @@
-:root{
-  --primary:#0f2a44;
-  --secondary:#ff9800;
-  --bg:#f4f6f8;
-  --border:#e5e7eb;
-  --text:#1f2937;
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Roboto, sans-serif;
 }
 
-/* RESET */
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+/* ===== BODY ===== */
+body {
+  background: #0f172a;
+  color: #e2e8f0;
+  padding: 16px;
 }
 
-body{
-  font-family:"Segoe UI", Inter, Arial, sans-serif;
-  background:var(--bg);
-  color:var(--text);
+/* ===== HEADER ===== */
+.app-header {
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
 }
 
-/* ================= HEADER ================= */
-
-.app-header{
-  background:#fff;
-  border-bottom:2px solid var(--border);
-  padding:10px 12px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
+/* ===== LOGO BAR ===== */
+.logo-bar {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 10px;
 }
 
-/* LOGO BAR (GRID STABIL) */
-.logo-bar{
-  display:grid;
-  grid-template-columns:repeat(4, 1fr);
-  gap:10px;
-  width:100%;
-  max-width:420px;
-  align-items:center;
-  justify-items:center;
+.logo-box {
+  background: rgba(255,255,255,0.05);
+  padding: 6px;
+  border-radius: 10px;
+  transition: 0.3s;
 }
 
-/* BOX PENGUNCI UKURAN */
-.logo-box{
-  width:100%;
-  height:24px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+.logo-box:hover {
+  background: rgba(255,255,255,0.15);
+  transform: scale(1.05);
 }
 
-/* LOGO FINAL CONTROL (INI KUNCI UTAMA) */
-.logo-box img.logo{
-  max-height:16px;
-  max-width:100%;
-  width:auto;
-  height:auto;
-  object-fit:contain;
-  display:block;
+.logo {
+  height: 28px;
+  object-fit: contain;
 }
 
-/* TITLE */
-.title{
-  margin-top:8px;
-  text-align:center;
+/* ===== TITLE ===== */
+.title {
+  text-align: center;
+  font-size: 14px;
+  color: #cbd5f5;
 }
 
-.title strong{
-  font-size:14px;
-  color:var(--primary);
+.title strong {
+  font-size: 16px;
+  color: #fff;
 }
 
-.title small{
-  font-size:12px;
-  color:#6b7280;
+/* ===== NAV ===== */
+nav {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
 }
 
-/* MOBILE */
-@media(max-width:600px){
-  .logo-bar{
-    max-width:100%;
-    gap:6px;
+nav button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background: #1e293b;
+  color: #e2e8f0;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: 600;
+}
+
+nav button:hover {
+  background: #2563eb;
+  transform: translateY(-2px);
+}
+
+/* ===== LIST ===== */
+h3 {
+  margin: 10px 0;
+}
+
+ul {
+  list-style: none;
+}
+
+li {
+  background: #1e293b;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  transition: 0.3s;
+}
+
+li:hover {
+  transform: scale(1.01);
+}
+
+/* ===== STATUS DOT ===== */
+li span {
+  margin-left: 5px;
+}
+
+/* ===== BUTTON ===== */
+button {
+  margin-top: 6px;
+  padding: 8px 10px;
+  border: none;
+  border-radius: 8px;
+  background: #22c55e;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: 600;
+}
+
+button:hover {
+  background: #16a34a;
+}
+
+/* ===== FORM ===== */
+input, select, textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border: 1px solid #334155;
+  background: #0f172a;
+  color: #e2e8f0;
+  outline: none;
+  transition: 0.2s;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 5px #3b82f6;
+}
+
+/* ===== TEXTAREA ===== */
+textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+/* ===== FILE INPUT ===== */
+input[type="file"] {
+  background: none;
+  border: none;
+}
+
+/* ===== MODAL ===== */
+#modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(4px);
+  justify-content: center;
+  align-items: center;
+}
+
+#modal .box {
+  background: #1e293b;
+  padding: 20px;
+  border-radius: 14px;
+  width: 90%;
+  max-width: 400px;
+  animation: fadeIn 0.25s ease;
+}
+
+/* ===== PREVIEW IMAGE ===== */
+#previewBox img {
+  border-radius: 10px;
+}
+
+/* ===== ANIMATION ===== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
   }
-
-  .logo-box{
-    height:20px;
-  }
-
-  .logo-box img.logo{
-    max-height:12px;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-/* NAV */
-nav{
-  display:flex;
-  gap:10px;
-  padding:12px;
-  justify-content:center;
-  background:var(--primary);
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar {
+  width: 6px;
 }
-
-nav button{
-  flex:1;
-  max-width:180px;
-  background:#ffffff22;
-  color:#fff;
-  border:1px solid #ffffff33;
-  padding:10px;
-  border-radius:10px;
-  cursor:pointer;
-  font-weight:600;
-}
-
-nav button:hover{
-  background:var(--secondary);
-  color:#000;
-}
-
-/* LIST */
-#jobList{
-  list-style:none;
-  padding:0 16px;
-}
-
-#jobList li{
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:14px;
-  padding:14px;
-  margin-bottom:10px;
-}
-
-/* FORM */
-.menu{ padding:16px; }
-
-form{
-  max-width:420px;
-  margin:auto;
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:16px;
-  padding:18px;
-}
-
-input, select, textarea{
-  width:100%;
-  padding:11px;
-  margin-bottom:10px;
-  border-radius:10px;
-  border:1px solid #d1d5db;
-}
-
-form button{
-  width:100%;
-  padding:12px;
-  background:var(--secondary);
-  border:none;
-  font-weight:700;
-  border-radius:12px;
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 10px;
 }
