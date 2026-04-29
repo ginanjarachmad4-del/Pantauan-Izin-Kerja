@@ -1,4 +1,17 @@
 /* =====================
+   ROOT COLOR (KAI)
+===================== */
+:root{
+  --primary:   #0f2a44;   /* biru KAI */
+  --secondary: #ff9800;   /* orange safety */
+  --success:   #2e7d32;   /* hijau */
+  --bg:        #f4f6f8;   /* abu terang */
+  --card:      #ffffff;
+  --text:      #1f2937;
+  --border:    #e5e7eb;
+}
+
+/* =====================
    RESET & GLOBAL
 ===================== */
 *{
@@ -9,8 +22,8 @@
 
 body{
   font-family:"Segoe UI", Inter, Arial, sans-serif;
-  background:#0e1117;
-  color:#e6e6e6;
+  background:var(--bg);
+  color:var(--text);
   padding-bottom:40px;
 }
 
@@ -21,8 +34,8 @@ h2{
   text-align:center;
   padding:18px 14px;
   margin-bottom:10px;
-  background:linear-gradient(135deg,#0b3c2d,#0f6b47);
-  color:#eafff6;
+  background:linear-gradient(135deg,var(--primary),#163a5c);
+  color:#fff;
   font-size:18px;
   font-weight:700;
   line-height:1.4;
@@ -31,7 +44,7 @@ h2{
 
 h3{
   margin:18px 16px 10px;
-  color:#7dffb3;
+  color:var(--primary);
   font-size:15px;
 }
 
@@ -43,16 +56,15 @@ nav{
   gap:12px;
   padding:14px;
   justify-content:center;
-  background:#0b0f14;
-  border-bottom:1px solid #1f2937;
+  background:var(--primary);
 }
 
 nav button{
   flex:1;
   max-width:180px;
-  background:#111827;
-  color:#e5e7eb;
-  border:1px solid #1f2937;
+  background:#ffffff22;
+  color:#fff;
+  border:1px solid #ffffff33;
   padding:11px 14px;
   border-radius:12px;
   cursor:pointer;
@@ -61,9 +73,9 @@ nav button{
 }
 
 nav button:hover{
-  background:#065f46;
-  border-color:#10b981;
-  color:#ecfdf5;
+  background:var(--secondary);
+  border-color:var(--secondary);
+  color:#000;
 }
 
 /* =====================
@@ -71,35 +83,34 @@ nav button:hover{
 ===================== */
 #jobList{
   list-style:none;
-  margin:0;
   padding:0 16px;
 }
 
 #jobList li{
-  background:#111827;
-  border:1px solid #1f2937;
+  background:var(--card);
+  border:1px solid var(--border);
   border-radius:14px;
   padding:14px 16px;
   margin-bottom:12px;
-  box-shadow:0 8px 20px rgba(0,0,0,.25);
+  box-shadow:0 6px 16px rgba(0,0,0,.08);
 }
 
 #jobList li b{
-  color:#7dffb3;
+  color:var(--primary);
   font-size:14px;
 }
 
 #jobList small{
   display:block;
   margin-top:4px;
-  color:#9ca3af;
+  color:#6b7280;
 }
 
 #jobList button{
   margin-top:10px;
-  background:#047857;
+  background:var(--success);
   border:none;
-  color:#ecfdf5;
+  color:#fff;
   padding:8px 14px;
   border-radius:8px;
   cursor:pointer;
@@ -107,7 +118,7 @@ nav button:hover{
 }
 
 #jobList button:hover{
-  background:#059669;
+  opacity:.9;
 }
 
 /* =====================
@@ -120,11 +131,11 @@ nav button:hover{
 form{
   max-width:420px;
   margin:auto;
-  background:#0b0f14;
-  border:1px solid #1f2937;
+  background:var(--card);
+  border:1px solid var(--border);
   border-radius:16px;
   padding:18px;
-  box-shadow:0 12px 30px rgba(0,0,0,.35);
+  box-shadow:0 12px 24px rgba(0,0,0,.12);
 }
 
 /* =====================
@@ -137,9 +148,9 @@ textarea{
   padding:11px 12px;
   margin-bottom:12px;
   border-radius:10px;
-  border:1px solid #1f2937;
-  background:#111827;
-  color:#e5e7eb;
+  border:1px solid #d1d5db;
+  background:#fff;
+  color:var(--text);
   font-size:14px;
 }
 
@@ -152,8 +163,8 @@ input:focus,
 select:focus,
 textarea:focus{
   outline:none;
-  border-color:#10b981;
-  box-shadow:0 0 0 1px #10b98144;
+  border-color:var(--secondary);
+  box-shadow:0 0 0 2px #ff980033;
 }
 
 textarea{
@@ -167,9 +178,9 @@ textarea{
 form button[type="submit"]{
   width:100%;
   padding:12px;
-  background:linear-gradient(135deg,#047857,#10b981);
+  background:linear-gradient(135deg,var(--secondary),#ffb74d);
   border:none;
-  color:#ecfdf5;
+  color:#000;
   font-size:15px;
   font-weight:700;
   border-radius:12px;
@@ -184,16 +195,16 @@ form button[type="submit"]:hover{
    PREVIEW FOTO
 ===================== */
 #previewBox{
-  background:#020617;
+  background:#fafafa;
   padding:12px;
   border-radius:12px;
-  border:1px dashed #1f2937;
+  border:1px dashed var(--border);
   text-align:center;
 }
 
 #previewBox p{
   margin-bottom:8px;
-  color:#7dffb3;
+  color:var(--primary);
   font-weight:600;
 }
 
@@ -201,7 +212,7 @@ form button[type="submit"]:hover{
   max-width:100%;
   max-height:240px;
   border-radius:10px;
-  border:1px solid #1f2937;
+  border:1px solid var(--border);
 }
 
 /* =====================
@@ -210,7 +221,7 @@ form button[type="submit"]:hover{
 #modal{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.75);
+  background:rgba(0,0,0,.6);
   display:none;
   align-items:center;
   justify-content:center;
@@ -218,8 +229,8 @@ form button[type="submit"]:hover{
 }
 
 #modal .box{
-  background:#0b0f14;
-  border:1px solid #1f2937;
+  background:var(--card);
+  border:1px solid var(--border);
   border-radius:16px;
   padding:20px;
   width:90%;
@@ -228,7 +239,7 @@ form button[type="submit"]:hover{
 
 #modal h3{
   margin-bottom:10px;
-  color:#7dffb3;
+  color:var(--primary);
 }
 
 #modal button{
@@ -237,8 +248,8 @@ form button[type="submit"]:hover{
 }
 
 #modal button[type="button"]{
-  background:#1f2937;
-  color:#e5e7eb;
+  background:#e5e7eb;
+  color:#111827;
 }
 
 /* =====================
